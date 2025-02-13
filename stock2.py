@@ -6,7 +6,7 @@ html = web.text
 
 # 인자 받기
 args = sys.argv
-print(args[1]) I
+print(args[1])
 
 def sam(jong):
     f1 = html.find(jong)
