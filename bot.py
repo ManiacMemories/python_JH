@@ -1,7 +1,8 @@
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, CallbackContext
-TOKEN = 'My TOKEN'
+TOKEN = '79123478830233:AAEsCZUO7HP2PVvrq1xPT4y8OZXdkNUw108'
 import random
+import talk_kjh as tk
 
 TRIGGER_WORDS = {
     "안녕": "안녕하세요! 저는 R_B입니다.!!🤖",
@@ -34,7 +35,7 @@ TRIGGER_WORDS = {
     "부탁해": "👌 맡겨만 주세요! 제가 해결해드릴게요!"
 }
 
-# 음악 리스트 (제목, 가수, 장르)
+# # 음악 리스트 (제목, 가수, 장르)
 MUSIC_LIST = [
     {"title": "Shape of You", "artist": "Ed Sheeran", "genre": "Pop", "link": "https://www.youtube.com/watch?v=JGwWNGJdvx8"},
     {"title": "Blinding Lights", "artist": "The Weeknd", "genre": "Synth-pop", "link": "https://www.youtube.com/watch?v=fHI8X4OXluQ"},
@@ -48,7 +49,7 @@ MUSIC_LIST = [
     {"title": "Dynamite", "artist": "BTS", "genre": "K-pop/Disco-pop", "link": "https://www.youtube.com/watch?v=gdZLi9oWNZg"}
 ]
 
-# 점심메뉴 리스트
+# # 점심메뉴 리스트
 LUNCH_MENU = ["김치찌개", "된장찌개", "불고기", "비빔밥", "라면", "돈까스", "제육볶음", "짜장면", "짬뽕", "떡볶이", "쌀국수", "샐러드", "굶기"]
 
 async def start(update, context):
@@ -72,7 +73,7 @@ async def help_command(update: Update, context: CallbackContext):
 
 # /music 명령어: 랜덤 음악 추천
 async def music(update: Update, context: CallbackContext):
-    music = random.choice(MUSIC_LIST)
+    music = random.choice(tk.MUSIC_LIST)
     response = (
         f"🎶 오늘의 추천 음악 🎶\n\n"
         f"🎵 제목: *{music['title']}*\n"
@@ -89,12 +90,12 @@ async def monitor_chat(update: Update, context: CallbackContext):
 
     # "점심메뉴" 명령어 처리
     if "점심메뉴" in user_text:
-        menu_choice = random.choice(LUNCH_MENU)
+        menu_choice = random.choice(tk.LUNCH_MENU)
         await context.bot.send_message(chat_id=chat_id, text=f"🍱 오늘의 추천 점심: *{menu_choice}* 😋", parse_mode="Markdown")
         return
 
     # 트리거 단어 확인 (첫 번째로 발견된 단어에만 반응)
-    for key, res in TRIGGER_WORDS.items():
+    for key, res in tk.TRIGGER_WORDS.items():
         if key in user_text:
             await context.bot.send_message(chat_id=chat_id, text=res)
             break
